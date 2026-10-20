@@ -26,7 +26,7 @@ public class StringBasics {
         // TODO: Fix this method
 
         if (text.length() > maxLength) {
-            text.substring(0, maxLength);
+            return text.substring(0, maxLength);
         }
         return text;
     }
@@ -41,11 +41,8 @@ public class StringBasics {
     public boolean parseYesOrNo(String text) {
         // FIXME: this seems to always return false, even when the `text` is "yes"
 
-        if (text.toLowerCase() == "yes") {
-            return true;
+            return text.equalsIgnoreCase("yes");
         }
-        return false;
-    }
 
     /**
      * Returns the FizzBuzz result for a given number.
@@ -61,8 +58,16 @@ public class StringBasics {
      * @return "fizz", "buzz", "fizzbuzz" or the given number as a string.
      */
     public String getFizzBuzz(int number) {
-        return "fizzbuzz"; // TODO: implement this method
-    }
+        if (number % 3 == 0 && number % 5 == 0){
+            return "fizzbuzz";
+        } else if (number % 3 == 0) {
+            return "fizz";
+        } else if (number % 5 == 0) {
+            return "buzz";
+        } else {
+            return String.valueOf(number);
+        }
+         }
 
     /**
      * Returns a new string with the given text centered inside. Spaces are added to
@@ -80,7 +85,19 @@ public class StringBasics {
      * @return The text centered in a string of the given width: " Java ".
      */
     public String center(String text, int width) {
-        return null; // TODO: implement this method
+        if (text.length() >= width){
+            return text;
+        }
+
+        int totalSpaces = width - text.length();
+        int leftSpaces = totalSpaces / 2;
+        int rightSpaces = totalSpaces - leftSpaces;
+
+        String leftPad = " ".repeat(leftSpaces);
+        String rightPad = " ".repeat(rightSpaces);
+
+        return leftPad + text + rightPad;
+        
     }
 
     /**
@@ -105,9 +122,15 @@ public class StringBasics {
      * @return The text formatted so that each line is centered separately.
      */
     public String centerMultiLine(String text, int lineWidth) {
-        // hint: you can split the text by newlines and use your `center` method to
-        // center each line separately
+        String[] lines = text.split("\n");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < lines.length; i++){
+            result.append(center(lines[i], lineWidth));
+            if (i < lines.length - 1){
+                result.append("\n");
+            }
+        }
+        return result.toString(); 
 
-        return null; // Implement this extra method if you want. It's not required.
     }
 }
