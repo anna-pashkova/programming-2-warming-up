@@ -80,6 +80,7 @@ public class ObjectExercise {
         // Let's use the getNames method we implemented earlier!
         List<String> names = getNames(people);
 
+
         switch (names.size()) {
             case 0:
                 return "";
